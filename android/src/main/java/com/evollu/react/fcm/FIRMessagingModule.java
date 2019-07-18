@@ -27,12 +27,12 @@ import com.google.firebase.messaging.RemoteMessage.Notification;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 
 import android.content.Context;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -125,11 +125,11 @@ public class FIRMessagingModule extends ReactContextBaseJavaModule implements Li
 
     @ReactMethod
     public void deleteNotificationChannel(String id, Promise promise) {
-	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-		    NotificationManager mngr = (NotificationManager) getReactApplicationContext().getSystemService(NOTIFICATION_SERVICE);
-		    mngr.deleteNotificationChannel(id);
-	    }
-	    promise.resolve(null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager mngr = (NotificationManager) getReactApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+            mngr.deleteNotificationChannel(id);
+        }
+        promise.resolve(null);
     }
 
     @ReactMethod
@@ -212,7 +212,7 @@ public class FIRMessagingModule extends ReactContextBaseJavaModule implements Li
 
     @ReactMethod
     public void subscribeToTopic(String topic, Promise promise){
-	    try {
+        try {
             FirebaseMessaging.getInstance().subscribeToTopic(topic);
             promise.resolve(null);
         } catch (Exception e) {
@@ -223,7 +223,7 @@ public class FIRMessagingModule extends ReactContextBaseJavaModule implements Li
 
     @ReactMethod
     public void unsubscribeFromTopic(String topic, Promise promise){
-	    try {
+        try {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
             promise.resolve(null);
         } catch (Exception e) {
